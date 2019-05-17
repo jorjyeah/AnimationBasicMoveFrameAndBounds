@@ -15,16 +15,35 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        box.layer.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
     }
 
     @IBAction func animateBox(_ sender: Any) {
-        print(self.box.frame)
-        UIView.animate(withDuration: 2, animations: {
-            self.box.frame.origin.y += 90
-            self.box.frame.origin.x += 80
+        self.box.moveToByBounds(x: 20, y: 0, duration: 1)
+        print("box")
+    }
+}
+
+extension UIView {
+    func moveToByFrame(x: CGFloat, y: CGFloat, duration: Double) {
+        print("Frame before [x : ",self.frame.origin.x,", y : ",self.frame.origin.y,", width : ",self.frame.width,", height : ",self.frame.height,"]")
+        
+        UIView.animate(withDuration: duration, animations: {
+            self.frame.origin.y += x
+            self.frame.origin.x += y
         }, completion: nil)
-        print(self.box.frame)
+        
+        print("Frame after [x : ",self.frame.origin.x,", y : ",self.frame.origin.y,", width : ",self.frame.width,", height : ",self.frame.height,"]")
+    }
+    
+    func moveToByBounds(x: CGFloat, y: CGFloat, duration: Double) {
+        print("Bounds before [x : ",self.bounds.origin.x,", y : ",self.bounds.origin.y,", width : ",self.bounds.width,", height : ",self.bounds.height,"]")
+        
+        UIView.animate(withDuration: duration, animations: {
+            self.bounds.origin.y += x
+            self.bounds.origin.x += y
+        }, completion: nil)
+        
+        print("Bounds after [x : ",self.bounds.origin.x,", y : ",self.bounds.origin.y,", width : ",self.bounds.width,", height : ",self.bounds.height,"]")
     }
 }
 
